@@ -26,23 +26,14 @@ Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
-])->group(function () {
+])->prefix('tenant')->group(function () {
     Route::get('/', function () {
-        return redirect(route('login'));
-        // return view('app.welcome');
-    });
+        // return redirect(route('login'));
+        return view('app.welcome');
+    })->name('tenant.home');
 
-    Route::get('/dashboard', function () {
+    Route::get('/tenant-dashboard', function () {
         return view('app.dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
-
-    Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-        // Route::resource('users', TenantController::class);
-    });
-
+    })->middleware(['auth', 'verified'])->name('tenant.dashboard');
     require __DIR__ . '/tenant-auth.php';
 });

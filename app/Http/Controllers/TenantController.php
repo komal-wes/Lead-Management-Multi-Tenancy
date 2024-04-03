@@ -94,9 +94,6 @@ class TenantController extends Controller
 
     public function tenantlogin($domain)
     {
-        $domain = Domain::where('domain', $domain)->first();
-        $url = 'http://'.$domain->domain.':'.config('app.vite_port').'/directLogin'.'/'.$domain->tenant->email;
-        // dd($url);
-        return Redirect::to($url);
+        return redirect(tenant_route('tenant.directlogin', ['domain' => $domain, 'email' => Auth::user()->email]));
     }
 }

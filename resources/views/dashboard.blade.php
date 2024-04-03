@@ -18,7 +18,7 @@
                     @foreach (auth()->user()->tenants as $tenant)
                         <div class="p-6 text-gray-900">
                             @foreach ($tenant->domains  as $domain )
-                                <x-btn-link class="ml-4 " href="{{ route('tenants.directlogin', $domain->domain) }}"> {{ $tenant->company_name }} </x-btn-link>
+                                <x-btn-link class="ml-4 " href="{{tenant_route($domain->domain, 'tenant.index',['email' => auth()->user()->email])}}"> {{ $tenant->company_name }} </x-btn-link>
                             @endforeach
                         </div>
                     @endforeach
