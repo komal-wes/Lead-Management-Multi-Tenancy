@@ -26,7 +26,7 @@ Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
-])->prefix('tenant')->group(function () {
+])->group(function () {
     Route::get('/', function () {
         // return redirect(route('login'));
         return view('app.welcome');
