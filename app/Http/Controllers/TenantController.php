@@ -48,7 +48,7 @@ class TenantController extends Controller
             },],
         ]);
 
-        $validatedData['parent_user'] = Auth::user()->id;
+        $validatedData['user_id'] = Auth::user()->id;
         $validatedData['tenant_url'] = preg_replace('/[^A-Za-z0-9]/', '', $validatedData['tenant_url']);
         $tenant = Tenant::create($validatedData);
         

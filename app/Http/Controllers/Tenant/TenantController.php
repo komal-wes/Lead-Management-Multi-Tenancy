@@ -39,7 +39,7 @@ class TenantController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $validatedData['parent_user'] = Auth::user()->id;
+        $validatedData['user_id'] = Auth::user()->id;
         $tenant = Tenant::create($validatedData);
         
         $tenant->domains()->create([

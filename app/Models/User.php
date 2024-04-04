@@ -45,6 +45,6 @@ class User extends Authenticatable
 
     public function tenants()
     {
-        return $this->hasMany(Tenant::class, 'parent_user', 'id');
+        return $this->hasMany(Tenant::class);
     }
 }
