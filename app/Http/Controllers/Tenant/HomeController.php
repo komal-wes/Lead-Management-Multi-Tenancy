@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +15,10 @@ class HomeController extends Controller
      */
     public function index($email)
     {
+
         if(Auth::user())
         {
-
-        return redirect(route('tenant.home'));
+            return redirect(route('tenant.dashboard'));
         }
         $user =  User::where('email', $email)->first();
         if(!$user)
@@ -25,7 +26,7 @@ class HomeController extends Controller
             return redirect(route('tenant.login'));
         }
         Auth::login($user);
-        return redirect(route('tenant.home'));
+        return redirect(route('tenant.dashboard'));
     }
 
     /**

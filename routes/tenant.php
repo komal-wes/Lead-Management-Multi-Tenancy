@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Tenant\DashboardController;
 use App\Http\Controllers\Tenant\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,13 +28,7 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', function () {
-        // return redirect(route('login'));
-        return view('app.welcome');
-    })->name('tenant.home');
-
-    Route::get('/tenant-dashboard', function () {
-        return view('app.dashboard');
-    })->middleware(['auth', 'verified'])->name('tenant.dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('tenant.home');
+    Route::get('/tenant-dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('tenant.dashboard');
     require __DIR__ . '/tenant-auth.php';
 });

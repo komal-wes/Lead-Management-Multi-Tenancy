@@ -15,25 +15,12 @@
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
         </div>
 
-        <!-- Company Name -->
-        <div>
-            <x-input-label for="company_name" :value="__('Company Name')" />
-            <x-text-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" :value="old('company_name')" required autofocus autocomplete="company_name" />
-            <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
-        </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Tenant URL -->
-        <div>
-            <x-input-label for="tenant_url" :value="__('Tenant URL')" />
-            <x-text-input id="tenant_url" class="block mt-1 w-full" type="text" name="tenant_url" :value="old('tenant_url')" required autofocus autocomplete="tenant_url" /><b>{{ '.'.config('app.domain') }}</b>
-            <x-input-error :messages="$errors->get('tenant_url')" class="mt-2" />
         </div>
 
         <!-- Password -->

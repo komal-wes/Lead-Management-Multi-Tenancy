@@ -37,14 +37,7 @@ class RegisteredUserController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
-            'company_name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'tenant_url' => ['required', 'string','max:255', 'unique:domains,domain',function ($attribute, $value, $fail) {
-                $urlWithDomain = $value . '.'. config('app.domain');
-                if (Domain::where('domain', $urlWithDomain)->exists()) {
-                    $fail('The domain already exists.');
-                }
-            },],
         ]);
 
         $user = User::where('email', $validatedData['email'])->first();
@@ -58,19 +51,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         Auth::login($user);
-
-        $tenant =  Tenant::where('email', $validatedData['email'])->first();
-        if(!$tenant)
-        {
-            $validatedData['parent_user'] = Auth::user()->id;
-            // We are creating Tenant here 
-            $tenant = Tenant::create($validatedData);
-        }
-        $validatedData['tenant_url'] = preg_replace('/[^A-Za-z0-9]/', '', $validatedData['tenant_url']);
-        // Assigning domain to Tenant
-        $tenant->domains()->create([
-            'domain' => $validatedData['tenant_url'].'.'.config('app.domain')
-        ]);
         return redirect(RouteServiceProvider::HOME);
     }
 }
+
+
