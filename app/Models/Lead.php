@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Constants\Lead\SourceConstants;
+use App\Constants\Lead\StatusConstants;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,6 +28,8 @@ class Lead extends Model
         'priority',
         'email'
     ];
+    protected $appends = ['lead_source_type','status_type'];
+
 
 
     public function creator()
@@ -38,5 +42,15 @@ class Lead extends Model
         return Attribute::make(
             get: fn (string $value) => Carbon::parse($value)->toDateString(),
         );
+    }
+
+    public function getLeadSourceTypeAttribute()
+    {
+        return SourceConstants::getSourceType($this->attributes['lead_source']);
+    }
+
+    public function getStatusTypeAttribute()
+    {
+        return StatusConstants::getStatusType($this->attributes['status']);
     }
 }

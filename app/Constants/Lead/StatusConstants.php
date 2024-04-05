@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Constants\Lead;
 
 class StatusConstants
@@ -7,6 +6,12 @@ class StatusConstants
     const NEW  = 0;
     const OPEN  = 1;
     const CLOSED = 2;
+
+    private static $statusLabels = [
+        self::NEW => 'NEW',
+        self::OPEN => 'OPEN',
+        self::CLOSED => 'CLOSED',
+    ];
 
     public static function getTypes()
     {
@@ -19,16 +24,7 @@ class StatusConstants
 
     public static function getStatusType($value)
     {
-        switch ($value) {
-            case self::NEW:
-                return 'NEW';
-                case self::OPEN:
-                    return 'OPEN';
-            case self::CLOSED:
-                return 'CLOSED';
-            default:
-                return null;
-        }
+        return self::$statusLabels[$value] ?? null;
     }
 
     public static function getStatuses()

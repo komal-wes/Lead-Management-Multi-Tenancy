@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('client_name');
             $table->integer('lead_source');
-            $table->timestamp('lead_date')->nullable();
+            $table->date('lead_date')->nullable();
             $table->string('job_title');
             $table->longText('description')->nullable(true);
             $table->integer('status');

@@ -46,10 +46,7 @@ class LeadController extends Controller
     
     public function updateLead(LeadStoreRequest $request, $id)
     {
-        $lead = Lead::find($id);
-        if ($lead) {
-            $lead->update($request->validated());
-        }
+        Lead::where('id', $id)->update($request->validated());
         return redirect()->route('leads.index')->with('success', 'Lead updated successfully!');
     }
 
@@ -69,10 +66,7 @@ class LeadController extends Controller
      */
     public function destroy(string $id)
     {
-        $lead = Lead::find($id);
-        if ($lead) {
-            $lead->delete();
-        }
+        $deleted = Lead::destroy($id);
         return redirect()->route('leads.index')->with('success', 'Lead deleted successfully!');
     }
 }

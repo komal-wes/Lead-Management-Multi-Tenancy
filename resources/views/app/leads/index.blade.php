@@ -51,12 +51,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            {{ \App\Constants\Lead\SourceConstants::getSourceType($lead->lead_source) }}
+                                            {{ $lead->lead_source_type }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            {{ \App\Constants\Lead\StatusConstants::getStatusType($lead->status) }}
+                                            {{ $lead->status_type }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">

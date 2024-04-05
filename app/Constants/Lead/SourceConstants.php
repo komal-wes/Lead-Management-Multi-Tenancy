@@ -9,6 +9,14 @@ class SourceConstants
     const Source3 = 2;
     const Source4 = 3;
 
+
+    private static $sourceLabels = [
+        self::Source1 => 'Source1',
+        self::Source2 => 'Source2',
+        self::Source3 => 'Source3',
+        self::Source4 => 'Source4',
+    ];
+
     public static function getTypes()
     {
         return [
@@ -21,18 +29,7 @@ class SourceConstants
 
     public static function getSourceType($value)
     {
-        switch ($value) {
-            case self::Source1:
-                return 'Source1';
-            case self::Source2:
-                return 'Source2';
-            case self::Source3:
-                return 'Source3';
-            case self::Source4:
-                return 'Source4';
-            default:
-                return null;
-        }
+        return self::$sourceLabels[$value] ?? null;
     }
 
     public static function getSources()
