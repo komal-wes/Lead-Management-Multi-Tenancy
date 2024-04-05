@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\UniqueDomain;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 use Stancl\Tenancy\Database\Models\Domain;
 
 class TenantStoreRequest extends FormRequest
@@ -27,19 +29,22 @@ class TenantStoreRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'company_name' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Password::defaults()],
             'tenant_url' => [
                 'required',
                 'string',
                 'max:255',
-                'unique:domains,domain',
-                function ($attribute, $value, $fail) {
-                    $urlWithDomain = $value . '.' . config('app.domain');
-                    if (Domain::where('domain', $urlWithDomain)->exists()) {
-                        $fail('The domain already exists.');
-                    }
-                },
-            ],
+                'regex:/^[a-zA-Z0-9-_]+$/',
+                'unique:domains,domain',new UniqueDomain
+            ]
+        ];
+    }
+
+
+    public function messages(): array
+    {
+        return [
+            'tenant_url.regex' => 'The :attribute may only contain letters, digits.',
         ];
     }
 }
