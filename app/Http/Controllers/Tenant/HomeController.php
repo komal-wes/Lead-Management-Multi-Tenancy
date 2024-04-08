@@ -8,18 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index($email)
     {
-        if(Auth::user())
-        {
-            return redirect(route('tenant.dashboard'));
-        }
         $user =  User::where('email', $email)->first();
-        if(!$user)
-        {
+        if (!$user) {
             return redirect(route('tenant.login'));
         }
         Auth::login($user);

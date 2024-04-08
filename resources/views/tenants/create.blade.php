@@ -43,9 +43,9 @@
 
                     <!-- Tenant URL -->
                     <div>
-                        <x-input-label for="tenant_url" :value="__('Tenant URL')" />
-                        <x-text-input id="tenant_url" class="block mt-1 w-full" type="text" name="tenant_url" :value="old('tenant_url')" required autofocus autocomplete="tenant_url" /><b>{{ '.'.config('app.domain') }}</b>
-                        <x-input-error :messages="$errors->get('tenant_url')" class="mt-2" />
+                        <x-input-label for="domain" :value="__('Tenant URL')" />
+                        <x-text-input id="domain" class="block mt-1 w-full" type="text" name="domain" :value="old('domain')" required autofocus autocomplete="domain" /><b>{{ '.'.config('app.domain') }}</b>
+                        <x-input-error :messages="$errors->get('domain')" class="mt-2" />
                     </div>
 
                     <!-- Password -->

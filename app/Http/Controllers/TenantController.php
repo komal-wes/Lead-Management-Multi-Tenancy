@@ -32,18 +32,10 @@ class TenantController extends Controller
      */
     public function store(TenantStoreRequest $request)
     {
-        $validatedData = $request->all();
-
-        $validatedData['user_id'] = Auth::user()->id;
-        $validatedData['tenant_url'] = preg_replace('/[^A-Za-z0-9]/', '', $validatedData['tenant_url']);
-        $tenant = Tenant::create($validatedData);
-        
-        // Assigning domain to Tenant
-        $tenant->domains()->create([
-            'domain' => $validatedData['tenant_url'].'.'.config('app.domain')
-        ]);
+        $domain = preg_replace('/[^A-Za-z0-9]/', '', $request->domain) . '.' . config('app.domain');
+        $tenant = Tenant::create(array_merge($request->all(), ['user_id' => Auth::user()->id, 'domain' => $domain]));
+        $tenant->domains()->create(['domain' => $domain]);
         return redirect()->route('dashboard');
-    
     }
     public function tenantlogin($domain)
     {
