@@ -15,16 +15,6 @@ class HomeController extends Controller
      */
     public function index($email)
     {
-        if(Auth::user())
-        {
-            return redirect(route('tenant.dashboard'));
-        }
-        $user =  User::where('email', $email)->first();
-        if(!$user)
-        {
-            return redirect(route('tenant.login'));
-        }
-        Auth::login($user);
         return redirect(route('tenant.dashboard'));
     }
 }
