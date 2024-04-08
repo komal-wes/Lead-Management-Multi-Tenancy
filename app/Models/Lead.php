@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Constants\Lead\SourceConstants;
-use App\Constants\Lead\StatusConstants;
+use App\Enums\SourcesEnum;
+use App\Enums\StatusesEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,21 +41,19 @@ class Lead extends Model
         );
     }
 
-    public function getLeadSourcesAttribute()
-    {   
-        $leadSources = [];
-        foreach (SourceConstants::cases() as $source) {
-            $leadSources[$source->value] = $source->name;
-        }
-        return $leadSources;
+    public function getLeadSourcesAttribute(): array
+    {
+        return array_combine(
+            array_column(SourcesEnum::cases(), 'value'),
+            array_column(SourcesEnum::cases(), 'name')
+        );
     }
 
     public function getStatusesAttribute()
     {
-        $statuses = [];
-        foreach (StatusConstants::cases() as $status) {
-            $statuses[$status->value] = $status->name;
-        }
-        return $statuses;
+        return array_combine(
+            array_column(SourcesEnum::cases(), 'value'),
+            array_column(SourcesEnum::cases(), 'name')
+        );
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Constants\Lead;
+namespace App\Enums;
 
-enum SourceConstants: int {
+enum SourcesEnum: int {
     case Source1 = 0;
     case Source2 = 1;
     case Source3 = 2;
