@@ -2,9 +2,11 @@
 
 namespace App\Enums;
 
+use App\Models\Lead;
+
 enum SourcesEnum: int {
-    case Source1 = 0;
-    case Source2 = 1;
-    case Source3 = 2;
-    case Source4 = 3;
+    case Source1 = Lead::SOURCE1;
+    case Source2 = Lead::SOURCE2;
+    case Source3 = Lead::SOURCE3;
+    case Source4 = Lead::SOURCE4;
 }

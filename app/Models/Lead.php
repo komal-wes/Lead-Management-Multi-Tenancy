@@ -29,6 +29,17 @@ class Lead extends Model
         'email'
     ];
 
+    const SOURCE1 = 0;
+    const SOURCE2 = 1;
+    const SOURCE3 = 2;
+    const SOURCE4 = 3;
+
+
+    const STATUS_NEW = 0;
+    const STATUS_OPEN = 1;
+    const STATUS_CLOSED = 2;
+
+
     public function creator()
     {
         return $this->belongsTo(User::class);
