@@ -19,8 +19,7 @@
                         <div class="p-6 text-gray-900">
                             @foreach ($tenant->domains as $domain)
                             <p class=" flex justify-start ">
-                                <x-btn-link class="ml-4 "
-                                    href="{{ tenant_route($domain->domain, 'tenant.index') }}">
+                                <x-btn-link class="ml-4" href="{{ tenant_route($domain->domain, 'tenant.index', ['email' => auth()->user()->email]) }}">
                                     {{ $tenant->company_name }} </x-btn-link>
                                 @if (tenancy()->tenant->domains()->where('domain', $domain->domain)->count() > 0)
                                     <svg width="20" height="20">
