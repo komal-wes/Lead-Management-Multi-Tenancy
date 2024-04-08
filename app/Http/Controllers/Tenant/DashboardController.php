@@ -17,11 +17,10 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $user = Auth::user();
-        tenancy()->central(function ($tenant) {
+        $tenants = tenancy()->central(function ($tenant) {
             $user = User::where('email', Auth::user()->email)->first();
+            return $user->tenants;
         });
-        $tenants = $user->tenants;
         return view('app.dashboard', ['tenants' => $tenants]);
     }
 }

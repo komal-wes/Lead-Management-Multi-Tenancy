@@ -27,10 +27,10 @@ class TenantStoreRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255','unique:users'],
             'company_name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Password::defaults()],
-            'tenant_url' => [
+            'domain' => [
                 'required',
                 'string',
                 'max:255',
@@ -44,7 +44,8 @@ class TenantStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'tenant_url.regex' => 'The :attribute may only contain letters, digits.',
+            'domain.regex' => 'The :attribute may only contain letters, digits.',
+            'email.unique' => 'Tenant is already registered with the given :attribute .',
         ];
     }
 }
