@@ -3,11 +3,8 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\DashboardController;
-use App\Http\Controllers\Tenant\ProfileController;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Tenant\LeadController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -30,5 +27,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('tenant.home');
     Route::get('/tenant-dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('tenant.dashboard');
+
+    Route::post('leads/update-lead/{lead}', [LeadController::class, 'updateLead'])->name('leads.updateLead');
+    Route::resource('leads', LeadController::class);
+
     require __DIR__ . '/tenant-auth.php';
 });
