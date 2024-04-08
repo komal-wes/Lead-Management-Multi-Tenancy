@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Tenant;
 
-use App\Constants\Lead\SourceConstants;
-use App\Constants\Lead\StatusConstants;
+use App\Models\Lead;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LeadStoreRequest extends FormRequest
 {
@@ -23,16 +23,17 @@ class LeadStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $lead = new Lead();
         return [
             'client_name' => 'required|string|max:255',
             'lead_source' => [
-                'required','in:' . implode(',', SourceConstants::getTypes()),
+                'required',Rule::in(array_keys($lead->lead_sources))
             ],
             'lead_date' => 'required|date',
             'job_title' => 'required|string|max:255',
             'description' => 'required',
             'status' => [
-                'required','in:' . implode(',', StatusConstants::getTypes()),
+                'required',Rule::in(array_keys($lead->statuses))
             ],
             'priority' => 'required|string|max:255',
             'email' => 'required|email|max:255'

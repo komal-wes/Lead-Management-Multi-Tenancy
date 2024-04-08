@@ -51,12 +51,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            {{ $lead->lead_source_type }}
+                                            {{ $lead->lead_sources[$lead->lead_source] }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            {{ $lead->status_type }}
+                                            {{ $lead->statuses[$lead->status] }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">

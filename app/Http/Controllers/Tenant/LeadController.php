@@ -1,14 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Tenant;
-
-use App\Constants\Lead\SourceConstants;
-use App\Constants\Lead\StatusConstants;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\LeadStoreRequest;
 use App\Models\Lead;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
@@ -27,9 +22,8 @@ class LeadController extends Controller
      */
     public function create()
     {
-        $lead_sources = SourceConstants::getSources();
-        $statuses = StatusConstants::getStatuses();
-        return view('app.leads.create', ['lead_sources' => $lead_sources,'statuses' => $statuses]);
+        $lead = new Lead();
+        return view('app.leads.create', ['lead' => $lead]);
     }
 
     /**
@@ -56,9 +50,7 @@ class LeadController extends Controller
      */
     public function show(Lead $lead)
     {
-        $lead_sources = SourceConstants::getSources();
-        $statuses = StatusConstants::getStatuses();
-        return view('app.leads.create', ['lead_sources' => $lead_sources,'statuses' => $statuses,'lead' => $lead]);
+        return view('app.leads.create', ['lead' => $lead]);
     }
 
     /**

@@ -28,9 +28,6 @@ class Lead extends Model
         'priority',
         'email'
     ];
-    protected $appends = ['lead_source_type','status_type'];
-
-
 
     public function creator()
     {
@@ -44,13 +41,21 @@ class Lead extends Model
         );
     }
 
-    public function getLeadSourceTypeAttribute()
-    {
-        return SourceConstants::getSourceType($this->attributes['lead_source']);
+    public function getLeadSourcesAttribute()
+    {   
+        $leadSources = [];
+        foreach (SourceConstants::cases() as $source) {
+            $leadSources[$source->value] = $source->name;
+        }
+        return $leadSources;
     }
 
-    public function getStatusTypeAttribute()
+    public function getStatusesAttribute()
     {
-        return StatusConstants::getStatusType($this->attributes['status']);
+        $statuses = [];
+        foreach (StatusConstants::cases() as $status) {
+            $statuses[$status->value] = $status->name;
+        }
+        return $statuses;
     }
 }
