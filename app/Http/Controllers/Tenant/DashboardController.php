@@ -17,8 +17,9 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $tenants = tenancy()->central(function ($tenant) {
-            $user = User::where('email', Auth::user()->email)->first();
+        $email = Auth::user()->email;
+        $tenants = tenancy()->central(function ($tenant) use($email) {
+            $user = User::where('email', $email)->first();
             return $user->tenants;
         });
         return view('app.dashboard', ['tenants' => $tenants]);

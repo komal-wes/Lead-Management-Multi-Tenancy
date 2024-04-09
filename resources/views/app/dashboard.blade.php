@@ -35,7 +35,7 @@
 
 
                 <div class="p-6 text-gray-900">
-                    <x-btn-link class="ml-4 " href="{{ route('tenants.create') }}"> Create a new tenant </x-btn-link>
+                    <x-btn-link class="ml-4 " href="{{ route('tenants.create') }}"> {{ __('messages.tenant.label.create') }} </x-btn-link>
                 </div>
 
             </div>

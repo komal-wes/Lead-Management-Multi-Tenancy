@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TenantStoreRequest;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules;
-use Stancl\Tenancy\Database\Models\Domain;
 
 class TenantController extends Controller
 {

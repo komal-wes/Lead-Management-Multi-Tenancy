@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Leads') }}
-            <x-btn-link class="ml-4 float-right" href="{{ route('leads.create') }}"> Add lead </x-btn-link>
+            <x-btn-link class="ml-4 float-right" href="{{ route('leads.create') }}"> {{ __('messages.lead.label.create')  }}</x-btn-link>
         </h2>
     </x-slot>
 
@@ -60,11 +60,11 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('leads.show', $lead) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{{ route('leads.show', $lead) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('messages.lead.label.edit')  }}</a>
                                         <form method="POST" action="{{ route('leads.destroy', $lead) }}" onsubmit="return confirm('Are you sure you want to delete this lead?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-indigo-600 hover:text-indigo-900">Delete</button>
+                                            <button type="submit" class="text-indigo-600 hover:text-indigo-900">{{ __('messages.lead.label.delete')  }}</button>
                                         </form>
                                     </td>
                                 </tr>
